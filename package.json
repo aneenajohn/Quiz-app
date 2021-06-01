@@ -20,7 +20,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm build",
+    "build": "npm run-script build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
