@@ -11,8 +11,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
+import { useData } from "../Context/dataContext";
 
 export function Home() {
+  const { quizData, quizChosen } = useData();
   return (
     <Container>
       <Grid container spacing={3}>
@@ -47,7 +49,10 @@ export function Home() {
                   <ListItemText primary="5 minutes" />
                 </ListItem>
               </List>
-              <Link to="/quiz">
+              <Link
+                to={{ pathname: "/quiz" }}
+                state={{ quizData, quizChosen: "English Quiz" }}
+              >
                 <Button variant="contained" color="primary">
                   Take quiz
                 </Button>
@@ -86,7 +91,10 @@ export function Home() {
                   <ListItemText primary="5 minutes" />
                 </ListItem>
               </List>
-              <Link to="/quiz">
+              <Link
+                to={{ pathname: "/quiz" }}
+                state={{ quizData, quizChosen: "Spanish Quiz" }}
+              >
                 <Button variant="contained" color="primary">
                   Take quiz
                 </Button>

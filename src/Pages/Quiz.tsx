@@ -2,7 +2,6 @@ import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { DB } from "../Types/quiz.types";
 import Card from "@material-ui/core/Card";
-// import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -12,32 +11,14 @@ import Radio from "@material-ui/core/Radio";
 import { FormControl, FormControlLabel } from "@material-ui/core";
 import { useStyles } from "../customStyles";
 import { Question } from "../Types/quiz.types";
-
-async function getQuizData(): Promise<DB> {
-  const { data } = await axios.get<DB>("https://be-ask.aneenasam.repl.co");
-  console.log("quizDB :", data.quizDB[0].quizName);
-  return data;
-}
-
-// getQuizData();
+import { useData } from "../Context/dataContext";
+import { useLocation } from "react-router-dom";
 
 export const Quiz = () => {
-  const [quizData, setQuizData] = useState<DB | null>();
+  const { quizData } = useData();
   const [index, setIndex] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
-
   const classes = useStyles();
-
-  useEffect(() => {
-    (async function () {
-      const quizData = await getQuizData();
-      console.log(quizData);
-      if ("quizName" in quizData) {
-        return setQuizData(quizData);
-      }
-      return setQuizData(quizData);
-    })();
-  }, []);
 
   function nextBtnHandler(
     index: number,
@@ -56,53 +37,67 @@ export const Quiz = () => {
     }
   }
   console.log("score", score);
-
+  console.log("inside quiz", quizData);
+  const {
+    state: { quizChosen }
+  } = useLocation();
+  console.log("chosen quiz", quizChosen);
   return (
     <Container>
       <Card>
         <CardContent>
           {quizData &&
-            quizData.quizDB.map((data) => {
-              return (
-                <>
-                  <Typography variant="h4" component="h1" color="primary">
-                    {data.quizName}
-                  </Typography>
-                  <Container>
-                    <Typography variant="h6" component="h2" color="textPrimary">
-                      {data.questions[index].question}
+            quizData
+              .filter((quiz) => quiz.quizName === quizChosen)
+              .map((data) => {
+                return (
+                  <>
+                    <Typography variant="h4" component="h1" color="primary">
+                      {data.quizName}
                     </Typography>
-                    <FormControl>
-                      <RadioGroup
-                        onChange={(e) =>
-                          calculateScore(e, data.questions[index].answer)
-                        }
+                    <Container>
+                      <Typography
+                        variant="h6"
+                        component="h2"
+                        color="textPrimary"
                       >
-                        {data.questions[index].options.map((option) => {
-                          return (
-                            <FormControlLabel
-                              control={<Radio color="primary" />}
-                              label={option.text}
-                              value={option.text}
-                            ></FormControlLabel>
-                          );
-                        })}
-                      </RadioGroup>
-                      <Button
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        onClick={() =>
-                          nextBtnHandler(index, setIndex, data.questions.length)
-                        }
-                      >
-                        Next
-                      </Button>
-                    </FormControl>
-                  </Container>
-                </>
-              );
-            })}
+                        {data.questions[index].question}
+                      </Typography>
+                      <FormControl>
+                        <RadioGroup
+                          onChange={(e) =>
+                            calculateScore(e, data.questions[index].answer)
+                          }
+                        >
+                          {data.questions[index].options.map((option) => {
+                            return (
+                              <FormControlLabel
+                                control={<Radio color="primary" />}
+                                label={option.text}
+                                value={option.text}
+                              ></FormControlLabel>
+                            );
+                          })}
+                        </RadioGroup>
+                        <Button
+                          className={classes.button}
+                          variant="contained"
+                          color="primary"
+                          onClick={() =>
+                            nextBtnHandler(
+                              index,
+                              setIndex,
+                              data.questions.length
+                            )
+                          }
+                        >
+                          Next
+                        </Button>
+                      </FormControl>
+                    </Container>
+                  </>
+                );
+              })}
         </CardContent>
       </Card>
     </Container>
