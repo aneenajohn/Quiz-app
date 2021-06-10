@@ -1,4 +1,3 @@
-import CardActions from "@material-ui/core/CardActions";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
@@ -12,8 +11,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import { useData } from "../Context/dataContext";
+import { useStyles } from "../customStyles";
 
 export function Home() {
+  const classes = useStyles();
   const { quizData, quizChosen } = useData();
   return (
     <Container>
@@ -95,7 +96,11 @@ export function Home() {
                 to={{ pathname: "/quiz" }}
                 state={{ quizData, quizChosen: "Spanish Quiz" }}
               >
-                <Button variant="contained" color="primary">
+                <Button
+                  className={classes.quizBtn}
+                  variant="contained"
+                  color="primary"
+                >
                   Take quiz
                 </Button>
               </Link>

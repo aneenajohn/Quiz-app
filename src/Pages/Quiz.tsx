@@ -13,11 +13,14 @@ import { useStyles } from "../customStyles";
 import { Question } from "../Types/quiz.types";
 import { useData } from "../Context/dataContext";
 import { useLocation } from "react-router-dom";
+import { QuizDB, Option } from "../Types/quiz.types";
+
+import { CALCULATE_SCORE } from "../Utils/constants";
 
 export const Quiz = () => {
-  const { quizData } = useData();
+  const { quizData, score, dataDispatch } = useData();
   const [index, setIndex] = useState<number>(0);
-  const [score, setScore] = useState<number>(0);
+  // const [score, setScore] = useState<number>(0);
   const classes = useStyles();
 
   function nextBtnHandler(
@@ -30,10 +33,10 @@ export const Quiz = () => {
     }
   }
 
-  function calculateScore(e, answer: string) {
+  function calculateScore(e, answer: string, points: number) {
     console.log(e.target.value, answer);
     if (e.target.value === answer) {
-      setScore(score + 5);
+      dataDispatch({ type: CALCULATE_SCORE, payLoad: points });
     }
   }
   console.log("score", score);
@@ -48,8 +51,8 @@ export const Quiz = () => {
         <CardContent>
           {quizData &&
             quizData
-              .filter((quiz) => quiz.quizName === quizChosen)
-              .map((data) => {
+              .filter((quiz: QuizDB) => quiz.quizName === quizChosen)
+              .map((data: QuizDB) => {
                 return (
                   <>
                     <Typography variant="h4" component="h1" color="primary">
@@ -66,30 +69,42 @@ export const Quiz = () => {
                       <FormControl>
                         <RadioGroup
                           onChange={(e) =>
-                            calculateScore(e, data.questions[index].answer)
+                            calculateScore(
+                              e,
+                              data.questions[index].answer,
+                              data.questions[index].points
+                            )
                           }
                         >
-                          {data.questions[index].options.map((option) => {
-                            return (
-                              <FormControlLabel
-                                control={<Radio color="primary" />}
-                                label={option.text}
-                                value={option.text}
-                              ></FormControlLabel>
-                            );
-                          })}
+                          {data.questions[index].options.map(
+                            (option: Option) => {
+                              return (
+                                <div key={option._id}>
+                                  <FormControlLabel
+                                    control={<Radio color="primary" />}
+                                    label={option.text}
+                                    value={option.text}
+                                  ></FormControlLabel>
+                                </div>
+                              );
+                            }
+                          )}
                         </RadioGroup>
                         <Button
                           className={classes.button}
                           variant="contained"
                           color="primary"
-                          onClick={() =>
+                          onClick={() => {
+                            console.log(
+                              data.questions[index].answer,
+                              data.questions[index].points
+                            );
                             nextBtnHandler(
                               index,
                               setIndex,
                               data.questions.length
-                            )
-                          }
+                            );
+                          }}
                         >
                           Next
                         </Button>

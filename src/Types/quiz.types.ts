@@ -1,14 +1,15 @@
 export type DB = {
-  quizDB: QuizDB[];
+  data: Quizzes[];
 };
 
-export type QuizDB = {
+export type Quizzes = {
+  _id: any;
   quizName: string;
-  playTime: string;
   questions: Question[];
 };
 
 export type Question = {
+  _id: any;
   question: string;
   points: number;
   options: Option[];
@@ -17,10 +18,11 @@ export type Question = {
 };
 
 export type Option = {
+  _id: any;
   text: string;
   /*make it true when the option is right
    */
-  isRight: boolean;
+  isSelected: boolean;
 };
 
 export type UserInfo = {
@@ -31,4 +33,8 @@ export type UserInfo = {
 export type HeaderProps = {
   userName: string;
   score: number;
+};
+
+export type currentQuiz = {
+  quizChosen: string;
 };
