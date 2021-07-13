@@ -13,101 +13,111 @@ import { Link } from "react-router-dom";
 import { useData } from "../Context/dataContext";
 import { useStyles } from "../customStyles";
 
+import { Header } from "../components/header";
+
 export function Home() {
   const classes = useStyles();
   const { quizData, quizChosen } = useData();
   return (
-    <Container>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography
-                variant="h5"
-                component="h2"
-                color="primary"
-                gutterBottom
-              >
-                English Vocab Quiz
-              </Typography>
-              <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <StarRateIcon fontSize="small" color="primary" />
-                  </ListItemIcon>
-                  <ListItemText primary="5 Questions" color="primary" />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <StarRateIcon fontSize="small" color="primary" />
-                  </ListItemIcon>
-                  <ListItemText primary="No negative marks" />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <StarRateIcon fontSize="small" color="primary" />
-                  </ListItemIcon>
-                  <ListItemText primary="5 minutes" />
-                </ListItem>
-              </List>
-              <Link
-                to={{ pathname: "/quiz" }}
-                state={{ quizData, quizChosen: "English Quiz" }}
-              >
-                <Button variant="contained" color="primary">
-                  Take quiz
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography
-                variant="h5"
-                component="h2"
-                color="primary"
-                gutterBottom
-              >
-                Spanish Vocab Quiz
-              </Typography>
-              <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <StarRateIcon fontSize="small" color="primary" />
-                  </ListItemIcon>
-                  <ListItemText primary="5 Questions" color="primary" />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <StarRateIcon fontSize="small" color="primary" />
-                  </ListItemIcon>
-                  <ListItemText primary="No negative marks" />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <StarRateIcon fontSize="small" color="primary" />
-                  </ListItemIcon>
-                  <ListItemText primary="5 minutes" />
-                </ListItem>
-              </List>
-              <Link
-                to={{ pathname: "/quiz" }}
-                state={{ quizData, quizChosen: "Spanish Quiz" }}
-              >
-                <Button
-                  className={classes.quizBtn}
-                  variant="contained"
+    <>
+      <Header />
+      <Container>
+        <br />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={12} md={6}>
+            <Card>
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="h2"
                   color="primary"
+                  gutterBottom
                 >
-                  Take quiz
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
+                  English Vocab Quiz
+                </Typography>
+                <List>
+                  <ListItem>
+                    <ListItemIcon>
+                      <StarRateIcon fontSize="small" color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="5 Questions" color="primary" />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemIcon>
+                      <StarRateIcon fontSize="small" color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="No negative marks" />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemIcon>
+                      <StarRateIcon fontSize="small" color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="5 minutes" />
+                  </ListItem>
+                </List>
+                <Link
+                  to={{ pathname: "/quiz" }}
+                  state={{ quizData, quizChosen: "English Quiz" }}
+                >
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.removeOutline}
+                  >
+                    Take quiz
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={12} md={6}>
+            <Card>
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  color="primary"
+                  gutterBottom
+                >
+                  Spanish Vocab Quiz
+                </Typography>
+                <List>
+                  <ListItem>
+                    <ListItemIcon>
+                      <StarRateIcon fontSize="small" color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="5 Questions" color="primary" />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemIcon>
+                      <StarRateIcon fontSize="small" color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="No negative marks" />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemIcon>
+                      <StarRateIcon fontSize="small" color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary="5 minutes" />
+                  </ListItem>
+                </List>
+                <Link
+                  to={{ pathname: "/quiz" }}
+                  state={{ quizData, quizChosen: "Spanish Quiz" }}
+                >
+                  <Button
+                    className={classes.removeOutline}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Take quiz
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 }

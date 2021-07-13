@@ -33,7 +33,7 @@ export const Quiz = () => {
     }
   }
 
-  function calculateScore(e, answer: string, points: number) {
+  function calculateScore(e:any, answer: string, points: number) {
     console.log(e.target.value, answer);
     if (e.target.value === answer) {
       dataDispatch({ type: CALCULATE_SCORE, payLoad: points });

@@ -10,14 +10,14 @@ export default function App() {
   const classes = useStyles();
   return (
     <div className="App">
-      <Typography
+      {/* <Typography
         className={classes.appHeader}
         variant="h4"
         component="h1"
         color="primary"
       >
         World Of Words
-      </Typography>
+      </Typography> */}
       <DataLoader />
       <Routes>
         <Route path="/" element={<Home />} />
