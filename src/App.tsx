@@ -5,6 +5,7 @@ import { Quiz } from "./Pages/QuizNew";
 import { DataLoader } from "./dataLoader";
 import Typography from "@material-ui/core/Typography";
 import { useStyles } from "./customStyles";
+import { Score } from "./Pages/score";
 
 export default function App() {
   const classes = useStyles();
@@ -22,6 +23,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/results" element={<Score />} />
       </Routes>
     </div>
   );

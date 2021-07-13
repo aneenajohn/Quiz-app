@@ -4,23 +4,17 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-
 import Paper from "@material-ui/core/Paper";
-import { FormControl, FormControlLabel } from "@material-ui/core";
 import { useStyles } from "../customStyles";
-
 import { Question } from "../Types/quiz.types";
 import { useData } from "../Context/dataContext";
 import { useLocation } from "react-router-dom";
 import { Option } from "../Types/quiz.types";
-import { useEffect, useReducer, useState } from "react";
-import axios from "axios";
-import { DB } from "../Types/quiz.types";
+import { useState } from "react";
 import { updateSelectedOptionStatus } from "../ServerCalls/serverCalls";
-
-import { CALCULATE_SCORE, SET_SELECTED_OPTION } from "../Utils/constants";
 import { calculateScore, setSelectedOption } from "../Utils/functions";
 import { Header } from "../components/header.jsx";
+import { useNavigate } from "react-router-dom";
 
 export const Quiz = () => {
   const { quizData, score, dataDispatch, selectedOption } = useData();
@@ -31,6 +25,7 @@ export const Quiz = () => {
   const [isChosen, setChosen] = useState<boolean>(false);
 
   const toggleActive = () => setChosen(!isChosen);
+  const navigate = useNavigate();
 
   function nextBtnHandler(
     index: number,
@@ -40,6 +35,7 @@ export const Quiz = () => {
     if (index !== totalQuestions - 1) {
       return setIndex(index + 1);
     }
+    navigate("/results");
   }
 
   console.log("score", score);
@@ -87,7 +83,6 @@ export const Quiz = () => {
                                       ? classes.quizOptionsActive
                                       : classes.quizOptions
                                   }
-                                  // className={classes.quizOptions}
                                   onClick={() => {
                                     setSelectedOption(
                                       option.text,
@@ -137,7 +132,7 @@ export const Quiz = () => {
                           Next
                         </Button>
                         <Typography>
-                          Current Question: {data.questions[index]}/
+                          Current Question: {data.questions[index] + 1}/
                           {data.questions.length}
                         </Typography>
                       </Container>
