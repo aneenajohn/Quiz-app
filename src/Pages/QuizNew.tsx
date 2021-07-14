@@ -19,11 +19,11 @@ import { useNavigate } from "react-router-dom";
 export const Quiz = () => {
   const { quizData, score, dataDispatch, selectedOption } = useData();
   const [index, setIndex] = useState<number>(0);
-  const [optionId, setOptionId] = useState<Option>(0);
+  const [optionId, setOptionId] = useState<any>(0);
   // const [score, setScore] = useState<number>(0);
   const classes = useStyles();
   const [isChosen, setChosen] = useState<boolean>(false);
-  // const [questionNumber, setQuestionNumber] = useState<number>(0);
+  const [currentQuestionNo, setCurrentQuestionNo] = useState(1);
   const toggleActive = () => setChosen(!isChosen);
   const navigate = useNavigate();
 
@@ -32,6 +32,7 @@ export const Quiz = () => {
     setIndex: any,
     totalQuestions: number
   ) {
+    setCurrentQuestionNo((currentQuestionNo) => currentQuestionNo + 1);
     if (index !== totalQuestions - 1) {
       return setIndex(index + 1);
     }
@@ -40,8 +41,10 @@ export const Quiz = () => {
 
   console.log("score", score);
   console.log("inside quiz", quizData);
-  const { state } = useLocation();
-  console.log({ state });
+  const {
+    state: { quizChosen }
+  }: any = useLocation();
+  console.log({ quizChosen });
   // console.log("chosen quiz", state.quizChosen);
 
   return (
@@ -52,7 +55,7 @@ export const Quiz = () => {
           <CardContent>
             {quizData &&
               quizData
-                .filter((quiz: Quizzes) => quiz.quizName === state?.quizChosen)
+                .filter((quiz: Quizzes) => quiz.quizName === quizChosen)
                 .map((data: Quizzes) => {
                   console.log("quizData", data);
                   return (
@@ -98,19 +101,18 @@ export const Quiz = () => {
                             )
                           )}
                         </Grid>
-                        {/* {/* <FormControl> */}
 
                         <Button
                           className={classes.button}
                           variant="contained"
                           color="primary"
                           onClick={() => {
-                            console.log(
-                              data._id,
-                              data.questions[index]._id,
-                              data.questions[index].answer,
-                              optionId
-                            );
+                            // console.log(
+                            //   data._id,
+                            //   data.questions[index]._id,
+                            //   data.questions[index].answer,
+                            //   optionId
+                            // );
                             nextBtnHandler(
                               index,
                               setIndex,
@@ -132,7 +134,7 @@ export const Quiz = () => {
                           Next
                         </Button>
                         <Typography>
-                          Current Question: {data.questions[index] + 1}/
+                          Current Question: {currentQuestionNo}/
                           {data.questions.length}
                         </Typography>
                       </Container>

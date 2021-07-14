@@ -21,6 +21,14 @@ export function Home() {
   return (
     <>
       <Header />
+      <Typography
+        className={classes.appHeader}
+        variant="h4"
+        component="h1"
+        color="primary"
+      >
+        World Of Words
+      </Typography>
       <Container>
         <br />
         <Grid container spacing={3}>

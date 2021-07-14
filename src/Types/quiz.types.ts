@@ -1,5 +1,5 @@
 export type DB = {
-  data: Quizzes[];
+  Quizzes: Quizzes[];
 };
 
 export type Quizzes = {

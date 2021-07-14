@@ -3,12 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "./Pages/Home";
 import { Quiz } from "./Pages/QuizNew";
 import { DataLoader } from "./dataLoader";
-import Typography from "@material-ui/core/Typography";
-import { useStyles } from "./customStyles";
+// import Typography from "@material-ui/core/Typography";
+// import { useStyles } from "./customStyles";
 import { Score } from "./Pages/score";
 
 export default function App() {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <div className="App">
       {/* <Typography
