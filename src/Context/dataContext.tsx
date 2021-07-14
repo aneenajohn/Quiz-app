@@ -1,5 +1,4 @@
 import { createContext, useReducer, useContext } from "react";
-import { DB } from "../Types/quiz.types";
 import { dataReducer } from "../Reducer/dataReducer";
 import {
   score,
@@ -17,21 +16,25 @@ export const DataProvider = ({ children }: any) => {
     score,
     selectedOption
   });
+
   return (
-    <DataContext.Provider
-      value={
-        (dataReducer,
-        {
-          quizData: state.quizData,
-          quizChosen: state.quizChosen,
-          score: state.score,
-          selectedOption: state.selectedOption,
-          dataDispatch
-        })
-      }
-    >
-      {children}
-    </DataContext.Provider>
+    <div>
+      <DataContext.Provider
+        value={
+          // (dataReducer,
+          {
+            quizData: state.quizData,
+            quizChosen: state.quizChosen,
+            score: state.score,
+            selectedOption: state.selectedOption,
+            dataDispatch
+          }
+          // )
+        }
+      >
+        {children}
+      </DataContext.Provider>
+    </div>
   );
 };
 

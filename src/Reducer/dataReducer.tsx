@@ -4,7 +4,7 @@ import {
   SET_SELECTED_OPTION
 } from "../Utils/constants";
 
-export const dataReducer = (state: string, action: any) => {
+export const dataReducer = (state:any, action: any) => {
   console.log("state", state);
   console.log("action", action);
   switch (action.type) {

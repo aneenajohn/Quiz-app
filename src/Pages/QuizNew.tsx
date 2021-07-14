@@ -5,8 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import { Quizzes } from "../Types/quiz.types";
 import { useStyles } from "../customStyles";
-import { Question } from "../Types/quiz.types";
 import { useData } from "../Context/dataContext";
 import { useLocation } from "react-router-dom";
 import { Option } from "../Types/quiz.types";
@@ -23,7 +23,7 @@ export const Quiz = () => {
   // const [score, setScore] = useState<number>(0);
   const classes = useStyles();
   const [isChosen, setChosen] = useState<boolean>(false);
-
+  // const [questionNumber, setQuestionNumber] = useState<number>(0);
   const toggleActive = () => setChosen(!isChosen);
   const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ export const Quiz = () => {
   console.log("inside quiz", quizData);
   const { state } = useLocation();
   console.log({ state });
-  console.log("chosen quiz", state.quizChosen);
+  // console.log("chosen quiz", state.quizChosen);
 
   return (
     <>
@@ -52,8 +52,8 @@ export const Quiz = () => {
           <CardContent>
             {quizData &&
               quizData
-                .filter((quiz: QuizDB) => quiz.quizName === state.quizChosen)
-                .map((data: QuizDB) => {
+                .filter((quiz: Quizzes) => quiz.quizName === state?.quizChosen)
+                .map((data: Quizzes) => {
                   console.log("quizData", data);
                   return (
                     <>
