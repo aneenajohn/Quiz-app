@@ -17,7 +17,7 @@ import { Header } from "../components/header";
 
 export function Home() {
   const classes = useStyles();
-  const { quizData, quizChosen } = useData();
+  const { quizData } = useData();
   return (
     <>
       <Header />
