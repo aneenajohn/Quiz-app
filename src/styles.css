@@ -2,3 +2,17 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+* {
+  margin: 0;
+}
+
+.progress {
+  width: 200px;
+  height: 200px;
+  margin-left: 40%;
+}
+
+.score--content {
+  margin: 2rem 0 1rem 0;
+}
